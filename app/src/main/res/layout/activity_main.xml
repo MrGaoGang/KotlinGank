@@ -8,27 +8,38 @@
     android:orientation="vertical"
     tools:context="com.mrwho.kotlindemo.activity.MainActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/main_top_back"
         android:focusable="true"
-        android:paddingTop="@dimen/dp10"
         android:focusableInTouchMode="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dp30">
+
+
+        <ImageView
+            android:id="@+id/addTabImg"
+            android:layout_width="@dimen/dp20"
+            android:layout_height="@dimen/dp20"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp10"
+            android:layout_marginTop="8dp"
+            android:src="@mipmap/add_tab"/>
 
         <EditText
+            android:id="@+id/searchEdit"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="36dp"
+            android:layout_alignParentTop="true"
             android:layout_marginLeft="@dimen/dp20"
             android:layout_marginRight="@dimen/dp20"
-            android:layout_marginTop="@dimen/dp20"
+            android:layout_toLeftOf="@id/addTabImg"
             android:alpha="0.8"
             android:background="@drawable/main_top_edit"
             android:drawableLeft="@mipmap/search"
             android:drawablePadding="10dp"
             android:hint="搜一搜吧"
-
             android:paddingLeft="@dimen/dp10"
             android:textAllCaps="false"
             android:textColor="@color/white"
@@ -39,6 +50,7 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/searchEdit"
             android:layout_marginTop="5dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -48,7 +60,7 @@
             app:tabTextColor="@color/text_inselect"
             >
         </android.support.design.widget.TabLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
 
     <android.support.v4.view.ViewPager

@@ -42,5 +42,6 @@ dependencies {
     compile 'com.squareup.okio:okio:1.13.0'
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
-
+    compile 'io.reactivex.rxjava2:rxjava:2.0.1'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
 }
