@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+
+    <com.mrwho.kotlindemo.utils.LucklyToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/main_top_back"
+
+        >
+
+    </com.mrwho.kotlindemo.utils.LucklyToolbar>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:paddingLeft="@dimen/dp10"
+        android:paddingRight="@dimen/dp10">
+
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

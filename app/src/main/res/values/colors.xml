@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/main_color</color>
+    <color name="colorPrimaryDark">@color/main_color</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="main_color">#ff9300</color>
+    <color name="white">@android:color/white</color>
+    <color name="normal_color">#929292</color>
+    <color name="text_inselect">#fcfbfb</color>
+
+    <color name="main_top_start">#f08b48</color>
+    <color name="main_top_end">#ee7044</color>
+    <color name="main_top_edit">#f9a67d</color>
+</resources>

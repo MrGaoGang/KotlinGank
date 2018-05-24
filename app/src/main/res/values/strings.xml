@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">KotlinDemo</string>
+    <string name="add_tabs">选择分类</string>
+</resources>
