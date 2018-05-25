@@ -81,7 +81,7 @@ class NormalFragment : BaseFragment(), IView, OnItemClickListener, XRecyclerView
      * 第一次显示的时候
      */
     override fun firstLazyLoad() {
-        presenterImpl.loadData(arguments.getString(ID))
+        presenterImpl.loadData(arguments.getString(ID),false)
     }
 
     /**
@@ -95,6 +95,7 @@ class NormalFragment : BaseFragment(), IView, OnItemClickListener, XRecyclerView
         xrecyclerView?.adapter = adapter
         xrecyclerView?.setLoadingMoreProgressStyle(ProgressStyle.BallPulseRise)
         xrecyclerView?.setLoadingListener(this)
+        xrecyclerView?.setLoadingMoreEnabled(true)
         presenterImpl = MainPresenterImpl()
         presenterImpl.attachView(this)
     }
@@ -145,7 +146,7 @@ class NormalFragment : BaseFragment(), IView, OnItemClickListener, XRecyclerView
         hander = MyHandler(context)
         hander?.postDelayed({
             adapter?.clear()
-            presenterImpl.loadData(arguments.getString(ID))
+            presenterImpl.loadData(arguments.getString(ID), true)
         }, Constants.delayTime)
 
     }

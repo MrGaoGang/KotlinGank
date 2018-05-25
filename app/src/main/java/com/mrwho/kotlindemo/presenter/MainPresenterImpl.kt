@@ -19,7 +19,10 @@ class MainPresenterImpl : BasePresenter<NormalFragment>(), MainPresenter {
     /**
      * 加载数据
      */
-    override fun loadData(type: String) {
+    override fun loadData(type: String, refresh: Boolean) {
+        if (refresh) {
+            currentPage = 0
+        }
         currentPage++
         mainModel.loadData(type, currentPage, object : MainDataCallback {
             override fun success(dataBean: DataBean) {

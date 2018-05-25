@@ -3,12 +3,14 @@ package com.mrwho.kotlindemo.activity
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
 import android.support.v4.content.ContextCompat
 import android.util.TypedValue
 import android.view.View
 import android.widget.TextView
 import com.chen.kotlintext.utils.SPUtils
+import com.jcodecraeer.xrecyclerview.AppBarStateChangeListener
 import com.mrwho.kotlindemo.R
 import com.mrwho.kotlindemo.adapter.MainFragmentAdapter
 import com.mrwho.kotlindemo.base.BaseActivity
@@ -24,6 +26,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : BaseActivity(), View.OnClickListener {
 
     private var nowPosition = 0
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -60,7 +64,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 
         }
 
-        tabLayout.setOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab) {
             }
 
@@ -73,6 +77,17 @@ class MainActivity : BaseActivity(), View.OnClickListener {
                 updateText(tab, true)
             }
         })
+        appbar.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
+            override fun onStateChanged(appBarLayout: AppBarLayout, state: State) {
+
+                when (state) {
+                    State.COLLAPSED -> editInputRelative.visibility = View.INVISIBLE
+                    State.EXPANDED -> editInputRelative.visibility = View.VISIBLE
+                    else -> editInputRelative.visibility = View.VISIBLE
+                }
+            }
+        })
+
     }
 
     private fun initBus() {

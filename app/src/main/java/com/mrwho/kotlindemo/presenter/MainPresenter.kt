@@ -9,5 +9,5 @@ package com.mrwho.kotlindemo.presenter
  */
 interface MainPresenter {
 
-    fun loadData(type: String)
+    fun loadData(type: String,refresh:Boolean=false)
 }
