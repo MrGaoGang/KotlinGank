@@ -23,7 +23,7 @@ class MainFragmentAdapter(fm: FragmentManager, items: List<MainItem>) : Fragment
         fragmentLis = ArrayList()
 
         for (each in fraList) {
-            fragmentLis.add(NormalFragment.newInstance(each.id))
+            fragmentLis.add(NormalFragment.newInstance(each.name))
         }
     }
 

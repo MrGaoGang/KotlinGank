@@ -32,6 +32,7 @@ class MainDataProvider {
 
         }
 
+        val pageSize = 20
 
     }
 }

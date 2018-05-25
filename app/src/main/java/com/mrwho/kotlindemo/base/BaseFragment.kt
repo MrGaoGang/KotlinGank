@@ -50,16 +50,16 @@ abstract class BaseFragment : Fragment() {
         arguments?.let { initDataInCreate(arguments) }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        //rootView = rootView?.let { inflater?.inflate(setLayoutResouceId(), container, false) }
 
         if (rootView == null) {
-            rootView = inflater?.inflate(setLayoutResouceId(), container, false)
+            rootView = inflater.inflate(setLayoutResouceId(), container, false)
         }
-        initView(rootView!!)
         mIsPrepare = true
         mIsFirstLoading = true
+        initView(rootView!!)
+
         onVisibleToUser()
         return rootView
     }
