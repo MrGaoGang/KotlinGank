@@ -44,6 +44,7 @@
         android:layout_below="@id/headerImg"
         android:layout_marginTop="@dimen/dp10"
         android:text="这是描述"
+        android:textIsSelectable="true"
         android:textAllCaps="false"
         android:textSize="@dimen/sp16"
         />

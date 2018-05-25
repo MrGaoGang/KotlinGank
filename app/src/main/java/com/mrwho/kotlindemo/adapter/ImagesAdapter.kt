@@ -23,7 +23,7 @@ class ImagesAdapter(val onItemClickListener: OnItemClickListener, val images: Li
     override fun getItemCount(): Int = images.size
 
     override fun onBindViewHolder(holder: ImagesViewHolder, position: Int) {
-        holder.bindData(images[position])
+        holder.bindData(position, images[position])
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImagesViewHolder {
@@ -34,11 +34,11 @@ class ImagesAdapter(val onItemClickListener: OnItemClickListener, val images: Li
 
     inner class ImagesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindData(path: String) {
+        fun bindData(position: Int, path: String) {
 
             Picasso.with(itemView.ctx).load(path + ImageUtils.iamgeSuffix).placeholder(R.drawable.loading_pic).into(itemView.itemImg)
 
-            itemView.itemImg.setOnClickListener { onItemClickListener.onImageClick(path) }
+            itemView.itemImg.setOnClickListener { onItemClickListener.onImageClick(position, images) }
         }
 
     }

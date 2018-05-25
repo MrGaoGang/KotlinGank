@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout android:id="@+id/toolbar"
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/toolbar"
                 android:orientation="vertical">
 
     <FrameLayout
+        android:id="@+id/left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -23,8 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:visibility="gone"
-            android:text="返回"/>
+            android:text="返回"
+            android:visibility="gone"/>
     </FrameLayout>
 
 
@@ -33,6 +34,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+
+        android:ellipsize="end"
+        android:maxEms="10"
+        android:singleLine="true"
         android:text="标题"
         android:textColor="@android:color/black"
         android:textSize="@dimen/sp18"/>
@@ -42,21 +47,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:layout_centerVertical="true">
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp">
 
         <ImageView
+            android:id="@+id/rightImg"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_gravity="center_vertical|right"
-            android:id="@+id/rightImg"
             android:visibility="gone"
             />
 
         <TextView
+            android:id="@+id/rightTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rightTv"
             android:layout_gravity="center_vertical|right"
             android:text="保存"/>
     </FrameLayout>

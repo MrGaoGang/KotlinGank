@@ -27,7 +27,6 @@ class RetrofitUtils private constructor() {
         val httpLog = HttpLoggingInterceptor()
         httpLog.level = HttpLoggingInterceptor.Level.BODY
         val okhttp: OkHttpClient = OkHttpClient.Builder()
-                .addInterceptor(httpLog)
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true)
                 .build()

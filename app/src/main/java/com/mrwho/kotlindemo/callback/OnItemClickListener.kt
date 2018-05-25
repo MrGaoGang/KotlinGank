@@ -11,5 +11,5 @@ interface OnItemClickListener {
 
     fun onItemClick(url: String)
 
-    fun onImageClick(path: String)
+    fun onImageClick(position:Int,path: List<String>)
 }

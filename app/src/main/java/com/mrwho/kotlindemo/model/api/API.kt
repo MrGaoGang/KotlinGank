@@ -1,7 +1,7 @@
 package com.mrwho.kotlindemo.model.api
 
+import com.mrwho.kotlindemo.Constants
 import com.mrwho.kotlindemo.beans.DataBean
-import com.mrwho.kotlindemo.utils.MainDataProvider
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -15,5 +15,5 @@ import retrofit2.http.Path
  */
 interface API {
     @GET("{type}/{pageSize}/{page}")
-    fun api(@Path("type") type: String, @Path("page") page: Int, @Path("pageSize") pageSize: Int = MainDataProvider.pageSize): Observable<DataBean>
+    fun api(@Path("type") type: String, @Path("page") page: Int, @Path("pageSize") pageSize: Int = Constants.pageSize): Observable<DataBean>
 }

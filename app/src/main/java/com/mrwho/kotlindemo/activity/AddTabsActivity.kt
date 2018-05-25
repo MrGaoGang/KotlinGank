@@ -75,7 +75,6 @@ class AddTabsActivity : BaseActivity(), View.OnClickListener {
         super.onDestroy()
         if (checkChange) {
             RxBus.instance.post(SelectChange())
-            print("我明明返回了呀")
         }
 
     }

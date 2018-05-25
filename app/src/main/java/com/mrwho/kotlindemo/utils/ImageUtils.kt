@@ -10,6 +10,11 @@ package com.mrwho.kotlindemo.utils
 class ImageUtils {
 
     companion object {
+        //读取列表时，不使用原图
         val iamgeSuffix = "?imageView2/0/w/300/h/300"
+
+        //预览图片的dialog tag
+
+        val PREVIEW_IMAGE_TAG="preViewImageTag"
     }
 }
