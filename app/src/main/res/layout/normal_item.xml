@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:padding="@dimen/dp10"
+
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/headerImg"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/logo"/>
+
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp10"
+        android:layout_toRightOf="@id/headerImg"
+        android:text="用户名"
+        android:textSize="@dimen/sp16"/>
+
+    <TextView
+        android:id="@+id/updateTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/userName"
+        android:layout_below="@id/userName"
+        android:layout_toRightOf="@id/headerImg"
+        android:text="发布的时间"
+        android:textSize="@dimen/sp10"/>
+
+
+    <TextView
+        android:id="@+id/descriptTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/headerImg"
+        android:layout_marginTop="@dimen/dp10"
+        android:text="这是描述"
+        android:textIsSelectable="true"
+        android:textAllCaps="false"
+        android:textSize="@dimen/sp16"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/imageRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/descriptTv"
+        android:layout_marginTop="@dimen/dp10"/>
+
+</RelativeLayout>

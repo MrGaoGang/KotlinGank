@@ -7,7 +7,7 @@ import java.lang.ref.WeakReference
  */
 abstract class BasePresenter<V : IView> : IPresenter<V> {
 
-    var mIViewRe: WeakReference<V>? = null
+    private var mIViewRe: WeakReference<V>? = null
 
     override fun attachView(view: V) {
         mIViewRe = WeakReference(view)

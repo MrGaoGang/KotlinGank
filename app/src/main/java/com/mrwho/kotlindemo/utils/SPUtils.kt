@@ -18,22 +18,22 @@ open class SPUtils {
         /**
          * 存放显示的item
          */
-        fun putSelect(context: Context, name: String, value: Boolean) {
+        fun putSelect(context: Context, id: String, value: Boolean) {
             val prefs =
                     context.getSharedPreferences("select", Context.MODE_PRIVATE)
 
-            prefs.edit().putBoolean(name, value).apply()
+            prefs.edit().putBoolean(id, value).apply()
 
         }
 
         /**
          * 获取默认选择的
          */
-        fun getSelect(context: Context, name: String): Boolean {
+        fun getSelect(context: Context, id: String): Boolean {
             val prefs =
                     context.getSharedPreferences("select", Context.MODE_PRIVATE)
 
-            return prefs.getBoolean(name, true)
+            return prefs.getBoolean(id, true)
         }
     }
 

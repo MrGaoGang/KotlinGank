@@ -9,7 +9,9 @@ import com.chen.kotlintext.utils.SPUtils
 import com.mrwho.kotlindemo.R
 import com.mrwho.kotlindemo.adapter.AddTabAdapter
 import com.mrwho.kotlindemo.base.BaseActivity
+import com.mrwho.kotlindemo.beans.SelectChange
 import com.mrwho.kotlindemo.utils.MainDataProvider
+import com.mrwho.kotlindemo.utils.RxBus
 import com.mrwho.kotlindemo.utils.StatusBarUtils
 import kotlinx.android.synthetic.main.add_tab_layout.*
 
@@ -21,8 +23,7 @@ import kotlinx.android.synthetic.main.add_tab_layout.*
  * Description:
  */
 class AddTabsActivity : BaseActivity(), View.OnClickListener {
-
-
+    var checkChange: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_tab_layout)
@@ -49,10 +50,12 @@ class AddTabsActivity : BaseActivity(), View.OnClickListener {
         val adapter = AddTabAdapter(list, selectList, object : OnSwithChangeListener {
             override fun onSwitchChecked(id: String) {
                 SPUtils.putSelect(getContext(), id, true)
+                checkChange = true
             }
 
             override fun onSwitchDischecked(id: String) {
                 SPUtils.putSelect(getContext(), id, false)
+                checkChange = true
             }
         })
         recyclerView.adapter = adapter
@@ -70,5 +73,9 @@ class AddTabsActivity : BaseActivity(), View.OnClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
+        if (checkChange) {
+            RxBus.instance.post(SelectChange())
+        }
+
     }
 }
