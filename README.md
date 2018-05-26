@@ -2,6 +2,9 @@
 使用kotlin完成干货集中营所有干货的APP
 效果图:<br>
 
+### 效果图
+
+此Gif图显示较快，可在app/release中下载apk  
 ![](https://github.com/MrGaoGang/KotlinGank/blob/master/images/image.gif)
 
 <br>
@@ -10,7 +13,7 @@
 
 同时也欢迎大家与我一起开发，进步。  
 
-###使用的框架
+### 使用的框架
 1. 网络请求框架 Retrofit+okhttp 
 2. 列表显示框架 XRecyclerView
 3. 图片加载框 Glide和Picasso
