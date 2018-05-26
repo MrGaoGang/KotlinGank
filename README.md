@@ -4,7 +4,7 @@
 
 ### 效果图
 
-此Gif图显示较快，可在app/release中下载apk  
+此Gif图显示较快，可在apk目录中下载apk  
 ![](https://github.com/MrGaoGang/KotlinGank/blob/master/images/image.gif)
 
 <br>
