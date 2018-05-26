@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewPager
 import android.util.TypedValue
 import android.view.View
 import android.widget.TextView
@@ -35,22 +36,37 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 
         addTabImg.setOnClickListener(this)
         initBus()
+        initAppbar()
         initViewPager()
     }
 
 
+    fun initAppbar() {
+        appbar.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
+            override fun onStateChanged(appBarLayout: AppBarLayout, state: State) {
+
+                when (state) {
+                    State.COLLAPSED -> editInputRelative.visibility = View.INVISIBLE
+                    State.EXPANDED -> editInputRelative.visibility = View.VISIBLE
+                    else -> editInputRelative.visibility = View.VISIBLE
+                }
+            }
+        })
+    }
+
     fun initViewPager() {
 
         viewPager.adapter = MainFragmentAdapter(supportFragmentManager, getSelectList())
+        tabLayout.tabMode = TabLayout.MODE_SCROLLABLE
+        tabLayout.setupWithViewPager(viewPager)
 
         if (viewPager.adapter.count > nowPosition) {
             viewPager.currentItem = nowPosition
         } else {
             viewPager.currentItem = viewPager.adapter.count - 1
         }
+        nowPosition = viewPager.currentItem
 
-        tabLayout.tabMode = TabLayout.MODE_SCROLLABLE
-        tabLayout.setupWithViewPager(viewPager)
 
         for (each in 0..viewPager.adapter.count - 1) {
             val tab = tabLayout.getTabAt(each)
@@ -69,22 +85,30 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
-                updateText(tab, false)
+                if (tab != null && tab.customView != null) {
+                    updateText(tab, false)
+
+                }
             }
 
             override fun onTabSelected(tab: TabLayout.Tab) {
                 viewPager.currentItem = tab.position
-                updateText(tab, true)
+                if (tab != null && tab.customView != null) {
+                    updateText(tab, true)
+                }
             }
         })
-        appbar.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
-            override fun onStateChanged(appBarLayout: AppBarLayout, state: State) {
 
-                when (state) {
-                    State.COLLAPSED -> editInputRelative.visibility = View.INVISIBLE
-                    State.EXPANDED -> editInputRelative.visibility = View.VISIBLE
-                    else -> editInputRelative.visibility = View.VISIBLE
-                }
+
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageSelected(position: Int) {
+                nowPosition = position
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
             }
         })
 

@@ -40,14 +40,14 @@ class NormalAdapter(val type: String, val onItemClick: OnItemClickListener) : Re
     fun addAll(dataBean: DataBean) {
         if (!dataBean.error && dataBean.results.size > 0) {
             dataList.addAll(dataBean.results as MutableList<NormalResult>)
-            notifyDataSetChanged()
+            notifyItemRangeInserted(dataList.size, dataBean.results.size)
         }
     }
 
 
     fun clear() {
         dataList.clear()
-        notifyDataSetChanged()
+        notifyItemRangeRemoved(0, dataList.size)
     }
 
     inner class NormalItemHolder(view: View) : RecyclerView.ViewHolder(view) {
