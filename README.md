@@ -1,6 +1,6 @@
 # KotlinGank
 使用kotlin完成干货集中营所有干货的APP
-效果图:<br>
+首先非常感谢http://gank.io/api/ 提供的API。
 
 ### 效果图
 
