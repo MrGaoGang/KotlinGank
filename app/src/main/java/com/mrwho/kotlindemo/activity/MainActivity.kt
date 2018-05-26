@@ -1,5 +1,6 @@
 package com.mrwho.kotlindemo.activity
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
@@ -7,8 +8,11 @@ import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
+import android.text.TextUtils
 import android.util.TypedValue
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import com.chen.kotlintext.utils.SPUtils
 import com.jcodecraeer.xrecyclerview.AppBarStateChangeListener
@@ -23,11 +27,12 @@ import com.mrwho.kotlindemo.utils.StatusBarUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.toast
+
 
 class MainActivity : BaseActivity(), View.OnClickListener {
 
     private var nowPosition = 0
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -122,6 +127,31 @@ class MainActivity : BaseActivity(), View.OnClickListener {
                     initViewPager()
                 }
 
+
+
+        searchEdit.setOnEditorActionListener {
+            textView, i, keyEvent ->
+            if (i == EditorInfo.IME_ACTION_SEARCH) {
+                // 当按了搜索之后关闭软键盘
+                (searchEdit.context.getSystemService(
+                        Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
+                        this.currentFocus.windowToken,
+                        InputMethodManager.HIDE_NOT_ALWAYS)
+                val data = searchEdit.text.toString().trim()
+                if (!TextUtils.isEmpty(data)) {
+                    val intent = Intent(this, SearchActivity::class.java)
+                    intent.putExtra("type", selectType())
+                    intent.putExtra("search", data)
+                    startActivity(intent)
+                } else {
+                    toast("请输入数据")
+                }
+                true
+            }
+
+            false
+        }
+
     }
 
     /**
@@ -134,6 +164,12 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 
         return selectList
     }
+
+    /**
+     * 搜索的时候 自动旋转类型
+     */
+    private fun selectType(): String = getSelectList().get(viewPager.currentItem).name
+
 
     /**
      * 如果选中了的

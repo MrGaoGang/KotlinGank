@@ -47,7 +47,7 @@ class NormalAdapter(val type: String, val onItemClick: OnItemClickListener) : Re
 
     fun clear() {
         dataList.clear()
-        notifyItemRangeRemoved(0, dataList.size)
+        notifyDataSetChanged()
     }
 
     inner class NormalItemHolder(view: View) : RecyclerView.ViewHolder(view) {

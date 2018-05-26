@@ -20,7 +20,7 @@ class RetrofitUtils private constructor() {
 
     companion object {
         val instance: RetrofitUtils by lazy { RetrofitUtils() }
-        private val BASE_URL = "http://gank.io/api/data/"
+        private val BASE_URL = "http://gank.io/api/"
     }
 
     init {

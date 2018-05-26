@@ -26,15 +26,32 @@ class MainPresenterImpl : BasePresenter<NormalFragment>(), MainPresenter {
         currentPage++
         mainModel.loadData(type, currentPage, object : MainDataCallback {
             override fun success(dataBean: DataBean) {
-                getIView()?.adapter?.addAll(dataBean)
-                getIView()?.xrecyclerView?.refreshComplete()
-                getIView()?.xrecyclerView?.loadMoreComplete()
+
+                getIView()?.let {
+                    with(it) {
+                        adapter.addAll(dataBean)
+                        xrecyclerView?.let {
+                            it.refreshComplete()
+                            it.loadMoreComplete()
+                        }
+                    }
+                }
+
             }
 
             override fun error(message: String) {
-                getIView()?.toast(message)
-                getIView()?.xrecyclerView?.refreshComplete()
-                getIView()?.xrecyclerView?.loadMoreComplete()
+
+                getIView()?.let {
+                    with(it) {
+                        toast(message)
+                        xrecyclerView?.let {
+                            it.refreshComplete()
+                            it.loadMoreComplete()
+                        }
+
+                    }
+                }
+
 
             }
         })

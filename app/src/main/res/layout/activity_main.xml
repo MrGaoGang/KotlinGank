@@ -59,6 +59,8 @@
                     android:drawablePadding="10dp"
                     android:hint="搜一搜吧"
                     android:paddingLeft="@dimen/dp10"
+                    android:imeOptions="actionSearch"
+                    android:singleLine="true"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"

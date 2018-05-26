@@ -14,6 +14,9 @@ import retrofit2.http.Path
  * Description:
  */
 interface API {
-    @GET("{type}/{pageSize}/{page}")
+    @GET("data/{type}/{pageSize}/{page}")
     fun api(@Path("type") type: String, @Path("page") page: Int, @Path("pageSize") pageSize: Int = Constants.pageSize): Observable<DataBean>
+
+    @GET("search/query/{search}/category/{type}/count/{pageSize}/page/{page}")
+    fun search(@Path("search") search:String,@Path("type") type: String, @Path("page") page: Int, @Path("pageSize")pageSize: Int = Constants.pageSize ):Observable<DataBean>
 }
