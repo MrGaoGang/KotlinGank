@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mrwho.kotlindemo.R
+import com.mrwho.kotlindemo.callback.OnItemClickEvent
 import com.mrwho.kotlindemo.callback.OnItemClickListener
 import com.mrwho.kotlindemo.extendsion.ctx
 import com.mrwho.kotlindemo.utils.ImageUtils
@@ -38,7 +39,7 @@ class ImagesAdapter(val onItemClickListener: OnItemClickListener, val images: Li
 
             Picasso.with(itemView.ctx).load(path + ImageUtils.iamgeSuffix).placeholder(R.drawable.loading_pic).into(itemView.itemImg)
 
-            itemView.itemImg.setOnClickListener { onItemClickListener.onImageClick(position, images) }
+            itemView.itemImg.setOnClickListener { onItemClickListener.onItemClick(OnItemClickEvent.ImageItemClick(position,images)) }
         }
 
     }

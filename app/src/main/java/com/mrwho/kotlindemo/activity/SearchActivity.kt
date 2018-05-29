@@ -8,10 +8,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
-import com.mrwho.kotlindemo.Constants
 import com.mrwho.kotlindemo.R
 import com.mrwho.kotlindemo.adapter.NormalAdapter
 import com.mrwho.kotlindemo.base.BaseActivity
+import com.mrwho.kotlindemo.base.Constants
+import com.mrwho.kotlindemo.callback.OnItemClickEvent
 import com.mrwho.kotlindemo.callback.OnItemClickListener
 import com.mrwho.kotlindemo.presenter.SearchPresenterImpl
 import com.mrwho.kotlindemo.utils.ImageUtils
@@ -23,7 +24,7 @@ import org.jetbrains.anko.toast
 import java.lang.ref.WeakReference
 import kotlin.properties.Delegates
 
-class SearchActivity : BaseActivity(), OnItemClickListener, XRecyclerView.LoadingListener {
+class SearchActivity : BaseActivity(), XRecyclerView.LoadingListener, OnItemClickListener {
 
 
     var adapter: NormalAdapter by Delegates.notNull()
@@ -83,14 +84,24 @@ class SearchActivity : BaseActivity(), OnItemClickListener, XRecyclerView.Loadin
 
     }
 
+    /**
+     * 点击事件
+     */
+    override fun onItemClick(event: OnItemClickEvent) {
+        when (event) {
+            is OnItemClickEvent.ImageItemClick -> onImageClick(event.position, event.path)
+            is OnItemClickEvent.ItemClick -> onItemClick(event.url)
+        }
 
-    override fun onItemClick(url: String) {
+    }
+
+    fun onItemClick(url: String) {
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra("url", url)
         startActivity(intent)
     }
 
-    override fun onImageClick(position: Int, path: List<String>) {
+    fun onImageClick(position: Int, path: List<String>) {
         val ft = supportFragmentManager.beginTransaction()
         val pre = supportFragmentManager.findFragmentByTag(ImageUtils.PREVIEW_IMAGE_TAG)
         if (pre != null) {

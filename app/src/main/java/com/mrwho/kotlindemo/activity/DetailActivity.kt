@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.KeyEvent
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.*
@@ -40,6 +41,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         toolbar.title.setSingleLine(true)
         toolbar.setTitle("正在加载...")
         webSettings = webView.settings
+
         with(webSettings) {
             setAppCacheEnabled(false)
             builtInZoomControls = true
@@ -124,4 +126,16 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
         }
     }
+
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        event?.let {
+            if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
+                webView.goBack()
+                return true
+            }
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+
 }

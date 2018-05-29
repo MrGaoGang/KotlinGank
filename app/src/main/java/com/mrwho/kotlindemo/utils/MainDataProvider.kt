@@ -19,13 +19,13 @@ data class MainItem(val id: String, val name: String)
  */
 class MainDataProvider {
     companion object {
-        val radomn = "瞎推荐"
-        val android = "Android"
-        val ios = "iOS"
-        val web = "前端"
-        val other = "拓展资源"
-        val reward = "福利"
-//        val video = "休息视频"
+        const val radomn = "瞎推荐"
+        const val android = "Android"
+        const val ios = "iOS"
+        const val web = "前端"
+        const val other = "拓展资源"
+        const val reward = "福利"
+        //        val video = "休息视频"
         fun getItems(): ArrayList<MainItem> {
             val list = ArrayList<MainItem>()
             list.add(MainItem("radomn", radomn))

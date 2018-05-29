@@ -1,6 +1,6 @@
 package com.mrwho.kotlindemo.model.api
 
-import com.mrwho.kotlindemo.Constants
+import com.mrwho.kotlindemo.base.Constants
 import com.mrwho.kotlindemo.beans.DataBean
 import io.reactivex.Observable
 import retrofit2.http.GET

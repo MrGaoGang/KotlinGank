@@ -1,6 +1,7 @@
 package com.mrwho.kotlindemo.extendsion
 
 import android.content.Context
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.view.View
 import android.widget.Toast
@@ -22,4 +23,11 @@ val Fragment.ctx: Context
 
 fun Fragment.toast(message: String) {
     Toast.makeText(ctx, message, Toast.LENGTH_SHORT).show()
+}
+
+fun Handler.postDelayed(
+        delay: Int,
+        token: Any? = null,
+        action: () -> Unit
+) {
 }
