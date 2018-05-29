@@ -7,18 +7,20 @@ import android.os.Handler
 import android.os.Message
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.View
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
-import com.mrwho.kotlindemo.Constants
 import com.mrwho.kotlindemo.R
 import com.mrwho.kotlindemo.activity.DetailActivity
 import com.mrwho.kotlindemo.adapter.NormalAdapter
 import com.mrwho.kotlindemo.base.BaseFragment
+import com.mrwho.kotlindemo.base.Constants
 import com.mrwho.kotlindemo.base.IView
 import com.mrwho.kotlindemo.callback.OnItemClickListener
 import com.mrwho.kotlindemo.presenter.MainPresenterImpl
 import com.mrwho.kotlindemo.utils.ImageUtils
+import com.mrwho.kotlindemo.utils.MainDataProvider
 import com.mrwho.kotlindemo.views.PreviewImageDlalogFragment
 import java.lang.ref.WeakReference
 import kotlin.properties.Delegates
@@ -81,7 +83,7 @@ class NormalFragment : BaseFragment(), IView, OnItemClickListener, XRecyclerView
      * 第一次显示的时候
      */
     override fun firstLazyLoad() {
-        presenterImpl.loadData(arguments.getString(ID),false)
+        presenterImpl.loadData(arguments.getString(ID), false)
     }
 
     /**
@@ -90,7 +92,11 @@ class NormalFragment : BaseFragment(), IView, OnItemClickListener, XRecyclerView
     override fun initView(rootView: View) {
         xrecyclerView = rootView.findViewById(R.id.xrecyclerView) as XRecyclerView
 
-        xrecyclerView?.layoutManager = LinearLayoutManager(context)
+        if (arguments.getString(ID).equals(MainDataProvider.reward)) {
+            xrecyclerView?.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        } else {
+            xrecyclerView?.layoutManager = LinearLayoutManager(context)
+        }
         adapter = NormalAdapter(arguments.getString(ID), this)
         xrecyclerView?.adapter = adapter
         xrecyclerView?.setLoadingMoreProgressStyle(ProgressStyle.BallPulseRise)

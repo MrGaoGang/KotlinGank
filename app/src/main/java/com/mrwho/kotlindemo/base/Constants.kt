@@ -1,4 +1,4 @@
-package com.mrwho.kotlindemo
+package com.mrwho.kotlindemo.base
 
 /**
  * Created by mr.gao on 2018/5/25.
@@ -13,4 +13,5 @@ object Constants {
 
     val delayTime:Long = 2500
     val pageSize = 20
+
 }

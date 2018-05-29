@@ -12,6 +12,8 @@ import com.mrwho.kotlindemo.beans.NormalResult
 import com.mrwho.kotlindemo.callback.OnItemClickListener
 import com.mrwho.kotlindemo.extendsion.ctx
 import com.mrwho.kotlindemo.utils.MainDataProvider
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.image_item.view.*
 import kotlinx.android.synthetic.main.normal_item.view.*
 
 /**
@@ -21,19 +23,33 @@ import kotlinx.android.synthetic.main.normal_item.view.*
  * Project Name:KotlinDemo
  * Description:
  */
-class NormalAdapter(val type: String, val onItemClick: OnItemClickListener) : RecyclerView.Adapter<NormalAdapter.NormalItemHolder>() {
+class NormalAdapter(val type: String, val onItemClick: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    companion object {
+        val IMAGE_TYPE = -1
+        val NORMAL_TYPE = 0
+    }
 
     private var dataList: MutableList<NormalResult> = ArrayList()
 
-    override fun onBindViewHolder(holder: NormalItemHolder, position: Int) {
-        holder.bindData(type, dataList[position])
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (getItemViewType(position)) {
+            IMAGE_TYPE -> (holder as ImageItemHolder).bindImage(dataList[position])
+            else -> (holder as NormalItemHolder).bindData(type, dataList[position])
+        }
     }
 
     override fun getItemCount(): Int = dataList.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NormalItemHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.normal_item, parent, false)
-        return NormalItemHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        if (viewType == IMAGE_TYPE) {
+            val view = LayoutInflater.from(parent.ctx).inflate(R.layout.image_item, parent, false)
+            return ImageItemHolder(view)
+        } else {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.normal_item, parent, false)
+            return NormalItemHolder(view)
+        }
+
     }
 
 
@@ -50,6 +66,14 @@ class NormalAdapter(val type: String, val onItemClick: OnItemClickListener) : Re
         notifyDataSetChanged()
     }
 
+    override fun getItemViewType(position: Int): Int {
+        if (dataList.get(position).type.equals(MainDataProvider.reward, true)) {
+            return IMAGE_TYPE
+        } else {
+            return NORMAL_TYPE
+        }
+    }
+
     inner class NormalItemHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bindData(type: String, normal: NormalResult) {
 
@@ -57,11 +81,7 @@ class NormalAdapter(val type: String, val onItemClick: OnItemClickListener) : Re
                 itemView.userName.text = who
                 itemView.updateTime.text = DateUtils.getFriendlyTime(DateUtils.string2date(publishedAt, DateUtils.YYYY_MM_DDT_HH_MM_SS))
 
-                if (type.equals(MainDataProvider.reward)) {
-                    itemView.descriptTv.text = desc
-                } else {
-                    itemView.descriptTv.text = desc + "\n" + url
-                }
+                itemView.descriptTv.text = desc + "\n" + url
                 if (images != null && images.size > 0) {
                     if (images.size < 3) {
                         itemView.imageRecyclerView.layoutManager = GridLayoutManager(itemView.ctx, images.size % 3)
@@ -71,22 +91,24 @@ class NormalAdapter(val type: String, val onItemClick: OnItemClickListener) : Re
 
                     itemView.imageRecyclerView.adapter = ImagesAdapter(onItemClick, images)
                 } else {
-                    //如果是福利的话
-                    if (type.equals(MainDataProvider.reward)) {
-                        itemView.imageRecyclerView.layoutManager = GridLayoutManager(itemView.ctx, 1)
-                        val reward = ArrayList<String>()
-                        reward.add(url)
-                        itemView.imageRecyclerView.adapter = ImagesAdapter(onItemClick, reward)
 
-                    } else {
-                        itemView.imageRecyclerView.visibility = View.GONE
-                    }
-
+                    itemView.imageRecyclerView.visibility = View.GONE
                 }
 
                 itemView.descriptTv.setOnClickListener { onItemClick.onItemClick(url) }
             }
         }
 
+    }
+
+
+    inner class ImageItemHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+        fun bindImage(result: NormalResult) {
+            Picasso.with(itemView.ctx).load(result.url).placeholder(R.drawable.logo).into(itemView.imageItem)
+            val reward = ArrayList<String>()
+            reward.add(result.url)
+            itemView.imageItem.setOnClickListener { onItemClick.onImageClick(0, reward) }
+        }
     }
 }

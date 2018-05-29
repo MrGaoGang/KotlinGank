@@ -8,7 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
-import com.mrwho.kotlindemo.Constants
+import com.mrwho.kotlindemo.base.Constants
 import com.mrwho.kotlindemo.R
 import com.mrwho.kotlindemo.adapter.NormalAdapter
 import com.mrwho.kotlindemo.base.BaseActivity
