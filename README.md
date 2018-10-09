@@ -21,3 +21,7 @@
 
 ### 联系方式
 email@:gaogangwork@qq.com
+
+
+欢迎关注我的微信公众号一起学习Mendix和Android:
+![](https://github.com/MrGaoGang/MendixWidgets/blob/master/images/wechat.jpg)
